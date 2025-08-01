@@ -1,18 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl48p7tu2qr2b"]
+[gd_scene load_steps=5 format=3 uid="uid://15wcao4csrbm"]
 
+[ext_resource type="Script" uid="uid://c5m5u7hv3nj3j" path="res://Scripts/Platform.gd" id="1_8n7cf"]
 [ext_resource type="Texture2D" uid="uid://tv0vxqsidfhj" path="res://icon.svg" id="1_mi635"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8bxr"]
-size = Vector2(290, 20)
+size = Vector2(8, 8)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pquxj"]
+size = Vector2(8, 8)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Platform" type="StaticBody2D"]
+script = ExtResource("1_8n7cf")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(0.500008, 0)
-scale = Vector2(2.25781, 0.15625)
+[node name="PlatformSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 2.08616e-07)
+scale = Vector2(0.0625, 0.0625)
 texture = ExtResource("1_mi635")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_s8bxr")
+disabled = true
+
+[node name="ActivationDetector" type="Area2D" parent="."]
+
+[node name="ActivationCollision" type="CollisionShape2D" parent="ActivationDetector"]
+shape = SubResource("RectangleShape2D_pquxj")

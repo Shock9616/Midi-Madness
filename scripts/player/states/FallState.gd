@@ -17,7 +17,7 @@ func physics_process(player: CharacterBody2D, delta: float) -> void:
 	if not player.is_on_floor():
 		if player.direction != 0.0:
 			# Apply horizontal movement
-			player.velocity.x = player.SPEED * player.direction
+			player.velocity.x = player.SPEED * player.direction * delta
 		else:
 			player.velocity.x = 0
 	else:

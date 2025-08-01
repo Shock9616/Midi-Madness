@@ -14,13 +14,15 @@ func physics_process(player: CharacterBody2D, delta: float) -> void:
 	
 	if player.direction != 0.0:
 		# Apply horizontal movement
-		player.velocity.x = player.SPEED * player.direction
+		player.velocity.x = player.SPEED * player.direction * delta
 	else:
 		# If not moving, switch to the idle state
 		player.change_state(IdleState.new())
 		
 	# Jump
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") or player.jump_was_buffered:
+		player.jump_was_buffered = false
+		player.jump_buffer_timer.stop()
 		player.change_state(JumpState.new())
 		
 	player.was_on_floor = player.is_on_floor()

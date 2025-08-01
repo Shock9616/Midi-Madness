@@ -19,7 +19,9 @@ func physics_process(player: CharacterBody2D, delta: float) -> void:
 		player.velocity.x = 0
 		
 	# Jump
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") or player.jump_was_buffered:
+		player.jump_was_buffered = false
+		player.jump_buffer_timer.stop()
 		player.change_state(JumpState.new())
 		
 	player.move_and_slide()

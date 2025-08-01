@@ -1,20 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://17af5v3kbeu3"]
 
-[ext_resource type="Script" uid="uid://7jopmier2fvn" path="res://scripts/player/player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://7jopmier2fvn" path="res://Scripts/player/Player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://tv0vxqsidfhj" path="res://icon.svg" id="2_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
-size = Vector2(128, 128)
+size = Vector2(16, 32)
 
-[node name="Root" type="Node2D"]
-
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_sh265")
 
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(0.125, 0.25)
 texture = ExtResource("2_i3pqv")
 
-[node name="CoyoteTimer" type="Timer" parent="Player"]
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true

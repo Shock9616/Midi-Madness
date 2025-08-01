@@ -1,21 +1,84 @@
-[gd_scene load_steps=3 format=3 uid="uid://deu5lme6rmsoi"]
+[gd_scene load_steps=5 format=3 uid="uid://deu5lme6rmsoi"]
 
-[ext_resource type="PackedScene" uid="uid://cl48p7tu2qr2b" path="res://scenes/platform.tscn" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://17af5v3kbeu3" path="res://scenes/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cl48p7tu2qr2b" path="res://Scenes/Wall.tscn" id="1_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://17af5v3kbeu3" path="res://Scenes/Player.tscn" id="2_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://15wcao4csrbm" path="res://Scenes/Platform.tscn" id="2_kldst"]
+[ext_resource type="Texture2D" uid="uid://dsmiyq3nbphgs" path="res://Assets/PlaceholderBackground.png" id="3_j5yw3"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Root" type="Node2D"]
+texture_filter = 1
 
-[node name="Node2D" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(543, 596)
+[node name="Room" type="Node" parent="."]
 
-[node name="Node2D2" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(161, 467)
+[node name="Floor" parent="Room" instance=ExtResource("1_qbsmt")]
+position = Vector2(320, 320)
+scale = Vector2(64, 1)
 
-[node name="Node2D3" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(573, 151)
+[node name="LeftWall" parent="Room" instance=ExtResource("1_qbsmt")]
+position = Vector2(64, 160)
+scale = Vector2(1, 40)
 
-[node name="Node2D4" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(949, 412)
+[node name="RightWall" parent="Room" instance=ExtResource("1_qbsmt")]
+position = Vector2(576, 160)
+scale = Vector2(1, 40)
 
-[node name="Root" parent="." instance=ExtResource("2_lnu2h")]
-position = Vector2(537, 489)
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(176, 264)
+scale = Vector2(4, 1)
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(328, 192)
+scale = Vector2(8, 1)
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(880, 528)
+scale = Vector2(16, 1)
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(208, 248)
+scale = Vector2(4, 1)
+
+[node name="Platform5" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(248, 232)
+scale = Vector2(4, 1)
+
+[node name="Platform6" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(176, 152)
+scale = Vector2(4, 1)
+
+[node name="Platform7" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(208, 136)
+scale = Vector2(4, 1)
+
+[node name="Platform8" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(240, 120)
+scale = Vector2(4, 1)
+
+[node name="Platform9" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(328, 80)
+scale = Vector2(8, 1)
+
+[node name="Platform10" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(416, 128)
+scale = Vector2(8, 1)
+
+[node name="Platform11" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(480, 72)
+scale = Vector2(8, 1)
+
+[node name="Platform12" parent="Platforms" instance=ExtResource("2_kldst")]
+position = Vector2(536, 224)
+scale = Vector2(8, 1)
+
+[node name="PlaceholderBackground" type="Sprite2D" parent="."]
+position = Vector2(320, 160)
+texture = ExtResource("3_j5yw3")
+
+[node name="Player" parent="." instance=ExtResource("2_cpr0p")]
+position = Vector2(128, 280)
+
+[node name="GameCamera" type="Camera2D" parent="."]
+position = Vector2(288, 160)
+zoom = Vector2(2, 2)
