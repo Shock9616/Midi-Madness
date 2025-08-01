@@ -13,7 +13,6 @@ extends StaticBody2D
 func _ready() -> void:
 	activation_detector.connect("body_entered", activate_platform, CONNECT_ONE_SHOT)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if collision.disabled:
