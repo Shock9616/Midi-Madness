@@ -2,12 +2,10 @@ extends PlayerState
 class_name RunState
 
 func enter(player: CharacterBody2D) -> void:
-	#player.sprite.play("idle")
-	pass
+	player.sprite.play("run")
 	
 func exit(player: CharacterBody2D) -> void:
-	#player.sprite.stop()
-	pass
+	player.sprite.stop()
 	
 func physics_process(player: CharacterBody2D, delta: float) -> void:
 	player.direction = Input.get_axis("move_left", "move_right")
