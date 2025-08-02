@@ -2,10 +2,12 @@ extends PlayerState
 class_name IdleState
 
 func enter(player: CharacterBody2D) -> void:
-	player.sprite.play("idle")
+	#player.sprite.play("idle")
+	pass
 	
 func exit(player: CharacterBody2D) -> void:
-	player.sprite.stop()
+	#player.sprite.stop()
+	pass
 	
 func physics_process(player: CharacterBody2D, delta: float) -> void:
 	# Run
