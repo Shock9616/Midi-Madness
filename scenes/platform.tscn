@@ -1,25 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://cknjdshm3g24m"]
+[gd_scene load_steps=8 format=3 uid="uid://cknjdshm3g24m"]
 
 [ext_resource type="Script" uid="uid://c5m5u7hv3nj3j" path="res://Scripts/Platform.gd" id="1_8n7cf"]
-[ext_resource type="Texture2D" uid="uid://tv0vxqsidfhj" path="res://icon.svg" id="1_mi635"]
-[ext_resource type="AudioStream" uid="uid://cgb3il83vncfp" path="res://Assets/Samples/EPiano_C1.mp3" id="3_kti7u"]
+[ext_resource type="Texture2D" uid="uid://c7bl7kp1c6tps" path="res://Assets/Sprites/NoteBlock.png" id="2_kti7u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vayem"]
+atlas = ExtResource("2_kti7u")
+region = Rect2(0, 0, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2t55"]
+atlas = ExtResource("2_kti7u")
+region = Rect2(0, 8, 32, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7274a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vayem")
+}],
+"loop": true,
+"name": &"activated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2t55")
+}],
+"loop": true,
+"name": &"deactivated",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8bxr"]
-size = Vector2(8, 8)
+size = Vector2(32, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pquxj"]
-size = Vector2(8, 8)
+size = Vector2(32, 8)
 
 [node name="Platform" type="StaticBody2D"]
+texture_filter = 1
 script = ExtResource("1_8n7cf")
 
-[node name="PlatformSprite" type="Sprite2D" parent="."]
-position = Vector2(4, 4)
-scale = Vector2(0.0625, 0.0625)
-texture = ExtResource("1_mi635")
+[node name="PlatformSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 4)
+sprite_frames = SubResource("SpriteFrames_7274a")
+animation = &"deactivated"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(4, 4)
+position = Vector2(16, 4)
 shape = SubResource("RectangleShape2D_s8bxr")
 disabled = true
 
@@ -27,9 +54,5 @@ disabled = true
 position = Vector2(4, 4)
 
 [node name="ActivationCollision" type="CollisionShape2D" parent="ActivationDetector"]
+position = Vector2(12, 0)
 shape = SubResource("RectangleShape2D_pquxj")
-
-[node name="NotePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_kti7u")
-volume_db = -20.0
-pitch_scale = 2.0

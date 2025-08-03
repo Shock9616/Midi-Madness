@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 # ------ Constants -----
-const SPEED = 12000.0
+const SPEED = 10000.0
 const JUMP_VELOCITY = -400.0
 # ----- Variables -----
 var direction := 0.0
 var was_on_floor := true
 var jump_was_buffered := false
 var current_state: PlayerState
+var stages_completed := 0
 
 # ----- Node References -----
 @onready var sprite := $PlayerSprite
@@ -18,7 +19,7 @@ var current_state: PlayerState
 func _ready() -> void:
 	change_state(IdleState.new())
 	jump_buffer_timer.timeout.connect(_on_jump_buffer_timeout)
-	#death_detection.connect("area_entered", die)
+	death_detection.connect("area_entered", die)
 
 func _physics_process(delta: float) -> void:
 	# Mirror sprite if facing left

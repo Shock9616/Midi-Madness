@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @onready var children := self.get_children()
 
@@ -9,5 +9,5 @@ func _process(delta: float) -> void:
 		if child.collision.disabled == false:
 			activated += 1
 			
-	if activated == len(children) - 1:
+	if activated == len(children):
 		print("All platforms active!")

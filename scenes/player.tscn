@@ -1,11 +1,105 @@
-[gd_scene load_steps=17 format=3 uid="uid://bb5j3mp2s0lwi"]
+[gd_scene load_steps=33 format=3 uid="uid://bb5j3mp2s0lwi"]
 
-[ext_resource type="Script" uid="uid://7jopmier2fvn" path="res://Scripts/Player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://cicyhnc3c7k7d" path="res://Assets/Sprites/Player/PlayerDeath.png" id="1_dewec"]
+[ext_resource type="Texture2D" uid="uid://dwq0vwv3v118b" path="res://Assets/Sprites/Player/PlayerJump.png" id="2_gntrk"]
 [ext_resource type="Texture2D" uid="uid://ckghffg5n4fqx" path="res://Assets/Sprites/Player/PlayerIdle.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://b8n7puxqyfao1" path="res://Assets/Sprites/Player/PlayerRun.png" id="3_gntrk"]
 
+[sub_resource type="GDScript" id="GDScript_kyqiw"]
+script/source = "extends CharacterBody2D
+
+# ------ Constants -----
+const SPEED = 10000.0
+const JUMP_VELOCITY = -400.0
+# ----- Variables -----
+var direction := 0.0
+var was_on_floor := true
+var jump_was_buffered := false
+var current_state: PlayerState
+
+# ----- Node References -----
+@onready var sprite := $PlayerSprite
+@onready var coyote_timer := $CoyoteTimer
+@onready var jump_buffer_timer := $JumpBufferTimer
+@onready var death_detection := $DeathDetection
+
+func _ready() -> void:
+	change_state(IdleState.new())
+	jump_buffer_timer.timeout.connect(_on_jump_buffer_timeout)
+	death_detection.connect(\"area_entered\", die)
+
+func _physics_process(delta: float) -> void:
+	# Mirror sprite if facing left
+	if direction > 0:
+		sprite.flip_h = false
+	elif direction < 0:
+		sprite.flip_h = true
+		
+	# Apply gravity
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	current_state.physics_process(self, delta)
+	
+	# Loop to the other side of the screen when going outside the play area
+	if self.position.x > 584:
+		self.position.x = 56
+	
+	if self.position.x < 56:
+		self.position.x = 584
+	
+func change_state(new_state: PlayerState) -> void:
+	if current_state:
+		current_state.exit(self)
+		
+	current_state = new_state
+	current_state.enter(self)
+
+func _on_jump_buffer_timeout() -> void:
+	jump_was_buffered = false
+
+func die(area: Area2D) -> void:
+	if area.name == \"PlayheadArea\":
+		change_state(DieState.new())
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
 size = Vector2(16, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulo2v"]
+atlas = ExtResource("1_dewec")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iu4k"]
+atlas = ExtResource("1_dewec")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0x7a"]
+atlas = ExtResource("1_dewec")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v66d"]
+atlas = ExtResource("1_dewec")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x63xi"]
+atlas = ExtResource("1_dewec")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2e8t"]
+atlas = ExtResource("1_dewec")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qidb7"]
+atlas = ExtResource("1_dewec")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70hv0"]
+atlas = ExtResource("1_dewec")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8flut"]
+atlas = ExtResource("1_dewec")
+region = Rect2(256, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
 atlas = ExtResource("2_kyqiw")
@@ -14,6 +108,26 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dewec"]
 atlas = ExtResource("2_kyqiw")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miouo"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3h8g"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e7my"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lslt6"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ixxa"]
 atlas = ExtResource("3_gntrk")
@@ -51,6 +165,38 @@ region = Rect2(224, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ulo2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iu4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0x7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5v66d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x63xi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2e8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qidb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70hv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8flut")
+}],
+"loop": false,
+"name": &"die",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_gntrk")
 }, {
 "duration": 1.0,
@@ -59,6 +205,36 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miouo")
+}],
+"loop": false,
+"name": &"jump_apex",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3h8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e7my")
+}],
+"loop": false,
+"name": &"jump_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arntx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lslt6")
+}],
+"loop": false,
+"name": &"jump_up",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -95,7 +271,7 @@ size = Vector2(16, 32)
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
-script = ExtResource("1_onrkg")
+script = SubResource("GDScript_kyqiw")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -105,7 +281,8 @@ shape = SubResource("RectangleShape2D_sh265")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_5ixxa")
-animation = &"run"
+animation = &"die"
+frame_progress = 0.215525
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -116,7 +293,6 @@ wait_time = 0.33
 one_shot = true
 
 [node name="DeathDetection" type="Area2D" parent="."]
-visible = false
 
 [node name="DeathDetectionCollision" type="CollisionShape2D" parent="DeathDetection"]
 shape = SubResource("RectangleShape2D_kyqiw")

@@ -2,8 +2,7 @@ extends PlayerState
 class_name FallState
 
 func enter(player: CharacterBody2D) -> void:
-	#player.sprite.play("idle")
-	pass
+	player.sprite.play("jump_down")
 	
 func exit(player: CharacterBody2D) -> void:
 	player.sprite.stop()

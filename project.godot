@@ -17,6 +17,10 @@ run/max_fps=60
 config/icon="res://icon.svg"
 run/default_gravity=1200.0
 
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
+
 [display]
 
 window/stretch/mode="viewport"
@@ -47,3 +51,4 @@ jump={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.141176, 0.152941, 0.227451, 1)
