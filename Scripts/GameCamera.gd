@@ -7,3 +7,5 @@ func _process(delta: float) -> void:
 		self.position = Vector2(288.0, -158.0)
 	elif Globals.stages_completed == 2:
 		self.position = Vector2(288.0, -478.0)
+	else:
+		self.position = Vector2(288.0, -798.0)

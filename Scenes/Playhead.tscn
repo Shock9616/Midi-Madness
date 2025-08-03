@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dd6wa2qecus28" path="res://Assets/Sprites/Playhead.png" id="1_b8e1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mecu3"]
-size = Vector2(16, 320)
+size = Vector2(16, 312)
 
 [node name="Playhead" type="Node2D"]
 texture_filter = 1
@@ -11,6 +11,7 @@ texture_filter = 1
 [node name="PlayheadArea" type="Area2D" parent="."]
 
 [node name="PlayheadAreaCollision" type="CollisionShape2D" parent="PlayheadArea"]
+position = Vector2(0, 4)
 scale = Vector2(0.19, 1)
 shape = SubResource("RectangleShape2D_mecu3")
 

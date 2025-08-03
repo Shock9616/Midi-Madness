@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Midi Madness"
-run/main_scene="uid://deu5lme6rmsoi"
+run/main_scene="uid://ctfin28l8bqvt"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -51,4 +51,5 @@ jump={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.141176, 0.152941, 0.227451, 1)

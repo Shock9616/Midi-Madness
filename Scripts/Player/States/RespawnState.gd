@@ -8,6 +8,8 @@ func enter(player: CharacterBody2D) -> void:
 		player.position = Vector2(112.0, -16.0)
 	elif Globals.stages_completed == 2:
 		player.position = Vector2(112.0, -336.0)
+	else:
+		player.position = Vector2(112.0, -656.0)
 	
 	player.sprite.flip_h = false
 	player.sprite.play_backwards("die")

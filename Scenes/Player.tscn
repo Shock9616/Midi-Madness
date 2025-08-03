@@ -1,9 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://bb5j3mp2s0lwi"]
+[gd_scene load_steps=34 format=3 uid="uid://bb5j3mp2s0lwi"]
 
 [ext_resource type="Texture2D" uid="uid://cicyhnc3c7k7d" path="res://Assets/Sprites/Player/PlayerDeath.png" id="1_dewec"]
 [ext_resource type="Texture2D" uid="uid://dwq0vwv3v118b" path="res://Assets/Sprites/Player/PlayerJump.png" id="2_gntrk"]
 [ext_resource type="Texture2D" uid="uid://ckghffg5n4fqx" path="res://Assets/Sprites/Player/PlayerIdle.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://b8n7puxqyfao1" path="res://Assets/Sprites/Player/PlayerRun.png" id="3_gntrk"]
+[ext_resource type="AudioStream" uid="uid://dimakit3l5qnr" path="res://Assets/SFX/Death.wav" id="5_5ixxa"]
 
 [sub_resource type="GDScript" id="GDScript_kyqiw"]
 script/source = "extends CharacterBody2D
@@ -24,7 +25,7 @@ var current_state: PlayerState
 @onready var death_detection := $DeathDetection
 
 func _ready() -> void:
-	change_state(IdleState.new())
+	change_state(RespawnState.new())
 	jump_buffer_timer.timeout.connect(_on_jump_buffer_timeout)
 	death_detection.connect(\"area_entered\", die)
 
@@ -266,8 +267,9 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
-size = Vector2(16, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ixxa"]
+radius = 8.0
+height = 32.0
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
@@ -295,4 +297,9 @@ one_shot = true
 [node name="DeathDetection" type="Area2D" parent="."]
 
 [node name="DeathDetectionCollision" type="CollisionShape2D" parent="DeathDetection"]
-shape = SubResource("RectangleShape2D_kyqiw")
+shape = SubResource("CapsuleShape2D_5ixxa")
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_5ixxa")
+volume_db = -20.0

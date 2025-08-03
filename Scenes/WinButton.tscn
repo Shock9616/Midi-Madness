@@ -1,15 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://cknjdshm3g24m"]
+[gd_scene load_steps=9 format=3 uid="uid://crxeui18lpof2"]
 
-[ext_resource type="Script" uid="uid://c5m5u7hv3nj3j" path="res://Scripts/Platform.gd" id="1_8n7cf"]
-[ext_resource type="Texture2D" uid="uid://c7bl7kp1c6tps" path="res://Assets/Sprites/NoteBlock.png" id="2_kti7u"]
-[ext_resource type="AudioStream" uid="uid://d16xd87nokbxs" path="res://Assets/SFX/HitBlock.wav" id="3_kti7u"]
+[ext_resource type="Script" uid="uid://dh0pjv13g28f1" path="res://Scripts/WinButton.gd" id="1_x6ao2"]
+[ext_resource type="Texture2D" uid="uid://c7bl7kp1c6tps" path="res://Assets/Sprites/NoteBlock.png" id="2_x6ao2"]
+[ext_resource type="FontFile" uid="uid://decuku0engys5" path="res://Assets/Fonts/ARCADECLASSIC.TTF" id="3_x6ao2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vayem"]
-atlas = ExtResource("2_kti7u")
+atlas = ExtResource("2_x6ao2")
 region = Rect2(0, 0, 32, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2t55"]
-atlas = ExtResource("2_kti7u")
+atlas = ExtResource("2_x6ao2")
 region = Rect2(0, 8, 32, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7274a"]
@@ -32,22 +32,24 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8bxr"]
-size = Vector2(32, 8)
+size = Vector2(256, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pquxj"]
-size = Vector2(32, 8)
+size = Vector2(256, 64)
 
 [node name="Platform" type="StaticBody2D"]
 texture_filter = 1
-script = ExtResource("1_8n7cf")
+script = ExtResource("1_x6ao2")
 
 [node name="PlatformSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, 4)
+position = Vector2(128, 32)
+scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_7274a")
 animation = &"deactivated"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(16, 4)
+visible = false
+position = Vector2(128, 32)
 shape = SubResource("RectangleShape2D_s8bxr")
 disabled = true
 
@@ -55,9 +57,18 @@ disabled = true
 position = Vector2(4, 4)
 
 [node name="ActivationCollision" type="CollisionShape2D" parent="ActivationDetector"]
-position = Vector2(12, 0)
+visible = false
+position = Vector2(124, 28)
 shape = SubResource("RectangleShape2D_pquxj")
 
-[node name="ActivateSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_kti7u")
-volume_db = -20.0
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 223.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.792157, 0.827451, 0.960784, 1)
+theme_override_fonts/font = ExtResource("3_x6ao2")
+theme_override_font_sizes/font_size = 40
+text = "Main   Menu"
+vertical_alignment = 1

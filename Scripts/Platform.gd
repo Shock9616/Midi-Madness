@@ -14,6 +14,8 @@ var body_just_collided := false
 @onready var sprite := $PlatformSprite
 @onready var note_player := $NotePlayer
 
+@onready var activate_sound := $ActivateSound
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	activation_detector.connect("body_entered", activate_platform)
@@ -42,6 +44,8 @@ func activate_platform(body: CharacterBody2D) -> void:
 	if body.name == "Player" and body.position.y > self.position.y:
 		collision.set_deferred("disabled", false)
 		body.velocity.y = -body.velocity.y
+		self.activate_sound.play()
+		
 
 func play_note(area: Area2D) -> void:
 	if area.name == "PlayheadArea" && collision.disabled == false:

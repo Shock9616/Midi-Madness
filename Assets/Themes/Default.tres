@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cg3fac2wkgte"]
+
+[ext_resource type="FontFile" uid="uid://decuku0engys5" path="res://Assets/Fonts/ARCADECLASSIC.TTF" id="1_qjduq"]
+[ext_resource type="Texture2D" uid="uid://c3ghv7ivcw07y" path="res://Assets/Textures/Button.png" id="1_qxlm8"]
+[ext_resource type="Texture2D" uid="uid://cq8lils3tcu4q" path="res://Assets/Textures/ButtonHover.png" id="2_mkp3d"]
+[ext_resource type="Texture2D" uid="uid://cfhdxxgm45pr2" path="res://Assets/Textures/ButtonPressed.png" id="4_aly33"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_72ptk"]
+texture = ExtResource("2_mkp3d")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ongpu"]
+texture = ExtResource("1_qxlm8")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mkp3d"]
+texture = ExtResource("4_aly33")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+
+[resource]
+Button/font_sizes/font_size = 50
+Button/fonts/font = ExtResource("1_qjduq")
+Button/styles/hover = SubResource("StyleBoxTexture_72ptk")
+Button/styles/normal = SubResource("StyleBoxTexture_ongpu")
+Button/styles/pressed = SubResource("StyleBoxTexture_mkp3d")
+Label/colors/font_color = Color(0.792157, 0.827451, 0.960784, 1)
+Label/font_sizes/font_size = 80
+Label/fonts/font = ExtResource("1_qjduq")

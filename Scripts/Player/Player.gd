@@ -8,16 +8,16 @@ var direction := 0.0
 var was_on_floor := true
 var jump_was_buffered := false
 var current_state: PlayerState
-var stages_completed := 0
 
 # ----- Node References -----
 @onready var sprite := $PlayerSprite
 @onready var coyote_timer := $CoyoteTimer
 @onready var jump_buffer_timer := $JumpBufferTimer
 @onready var death_detection := $DeathDetection
+@onready var die_sound := $DieSound
 
 func _ready() -> void:
-	change_state(IdleState.new())
+	change_state(RespawnState.new())
 	jump_buffer_timer.timeout.connect(_on_jump_buffer_timeout)
 	death_detection.connect("area_entered", die)
 

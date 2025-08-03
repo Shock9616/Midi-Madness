@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctfin28l8bqvt"]
+
+[ext_resource type="Theme" uid="uid://cg3fac2wkgte" path="res://Assets/Themes/Default.tres" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://dkksfn4du14xn" path="res://Scripts/Lv1Button.gd" id="2_8saeu"]
+[ext_resource type="AudioStream" uid="uid://be5lib83hd3nn" path="res://Assets/Music/MenuTheme.mp3" id="2_853f1"]
+
+[node name="MainMenu" type="Node2D"]
+texture_filter = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 552.0
+offset_bottom = 97.0
+theme = ExtResource("1_tt5f1")
+text = "Midi   Madness"
+
+[node name="Lv1Button" type="Button" parent="."]
+offset_left = 96.0
+offset_top = 96.0
+offset_right = 474.0
+offset_bottom = 183.0
+theme = ExtResource("1_tt5f1")
+text = "Level 1"
+script = ExtResource("2_8saeu")
+
+[node name="Lv2Button" type="Button" parent="."]
+offset_left = 96.0
+offset_top = 192.0
+offset_right = 472.0
+offset_bottom = 304.0
+theme = ExtResource("1_tt5f1")
+theme_override_font_sizes/font_size = 30
+text = "Level 2
+(Coming Soon)"
+
+[node name="MenuCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(288, 162)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_853f1")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="Lv1Button" to="Lv1Button" method="_on_pressed"]
